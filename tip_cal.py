@@ -17,4 +17,9 @@ total_bill = float(total_bill) + float(total_bill)*float(tip_percent)/100
 split_bill = input("how manu people want to split")
 
 eachbill = round(total_bill/float(split_bill) , 2)
+
+##formating to exact 2 decimal places 34.50 instead of 34.5 (round function will ignore the zero)
+
+eachbill = "{:.2f}".format(eachbill)
 print(f"each person should pay {eachbill} ")
+
