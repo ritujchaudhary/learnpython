@@ -81,33 +81,30 @@ for x in range(0,len(chosen_word)):
 
 print(empty_list)
 
-chosen_word_list = []
-for x in chosen_word:
-  chosen_word_list.append(x)
-
 while not end_of_game:
     guess = input("Guess a letter: ").lower()
 
     #Check guessed letter
-    # for position in range(word_length):
-    #     letter = chosen_word[position]
-    #     if letter == guess:
-    #       empty_list[position] = letter
-    #     else:
-    #       lives -= 1
-    #       print(lives)
-
-    if guess in chosen_word_list:
-      for position in range(word_length):
+    for position in range(word_length):
         letter = chosen_word[position]
         if letter == guess:
           empty_list[position] = letter
-      print(f"{' '.join(empty_list)}")  
-    else:
+          
+    print(f"{' '.join(empty_list)}")
+    if guess not in chosen_word:
       lives -= 1
       print(stages[lives])
-      #print(lives)
-    
+
+    # if guess in chosen_word:
+    #   for position in range(word_length):
+    #     letter = chosen_word[position]
+    #     if letter == guess:
+    #       empty_list[position] = letter
+    #   print(f"{' '.join(empty_list)}")  
+    # else:
+    #   lives -= 1
+    #   print(stages[lives])
+    #   #print(lives)
   
     if lives == 0:
       end_of_game = True
