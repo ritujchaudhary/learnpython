@@ -1,64 +1,128 @@
-#Step 2
+#Step 4
 
 import random
-word_list = ["aardvark", "baboon", "camel"]
+
+stages = ['''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ / \  |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ /    |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|   |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+  |   |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+      |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+      |
+      |
+      |
+      |
+=========
+''']
+
+end_of_game = False
+word_list = ["ardvark", "baboon", "camel"]
 chosen_word = random.choice(word_list)
+word_length = len(chosen_word)
+
+lives = 6
+#TODO-1: - Create a variable called 'lives' to keep track of the number of lives left. 
+#Set 'lives' to equal 6.
 
 #Testing code
 print(f'Pssst, the solution is {chosen_word}.')
 
-#TODO-1: - Create an empty List called display.
-#For each letter in the chosen_word, add a "_" to 'display'.
-#So if the chosen_word was "apple", display should be ["_", "_", "_", "_", "_"] with 5 "_" representing each letter to guess.
+#Create blanks
 empty_list =[]
 
 for x in range(0,len(chosen_word)):
-  empty_list.append("_")
+  empty_list.append("_")  
 
 # guess = input("Guess a letter: ").lower()
-#print(empty_list)
 
-#TODO-2: - Loop through each position in the chosen_word;
-#If the letter at that position matches 'guess' then reveal that letter in the display at that position.
-#e.g. If the user guessed "p" and the chosen word was "apple", then display should be ["_", "p", "p", "_", "_"].
-# for letter in chosen_word:
-#     if letter == guess:
-#         print("Right")
-#     else:
-#         print("Wrong")
-x=0
-##########################my way###################
-# for letter in chosen_word:
-#   if letter == guess:
-#     empty_list[x] = guess
-#     x+=1
-#   else:
-#     x+=1
+print(empty_list)
 
-# print(empty_list)
-##########################my way###################  
+chosen_word_list = []
+for x in chosen_word:
+  chosen_word_list.append(x)
 
-# for position in range(len(chosen_word)):
-#   letter = chosen_word[position]
-#   if letter == guess:
-#     empty_list[position] = guess
+while not end_of_game:
+    guess = input("Guess a letter: ").lower()
 
-# print(empty_list)
+    #Check guessed letter
+    # for position in range(word_length):
+    #     letter = chosen_word[position]
+    #     if letter == guess:
+    #       empty_list[position] = letter
+    #     else:
+    #       lives -= 1
+    #       print(lives)
+
+    if guess in chosen_word_list:
+      for position in range(word_length):
+        letter = chosen_word[position]
+        if letter == guess:
+          empty_list[position] = letter
+      print(f"{' '.join(empty_list)}")  
+    else:
+      lives -= 1
+      print(stages[lives])
+      #print(lives)
     
-
-#TODO-3: - Print 'display' and you should see the guessed letter in the correct position and every other letter replace with "_".
-#Hint - Don't worry about getting the user to guess the next letter. We'll tackle that in step 3.
-
-game = False
-
-while not game:
-  guess = input("Guess a letter: ").lower()
-  for position in range(len(chosen_word)):
-    letter = chosen_word[position]
-    if letter == guess:
-        empty_list[position] = letter
-  print(empty_list)
   
-  if '_' not in empty_list:
-    game = True
-    print("you win!!")
+    if lives == 0:
+      end_of_game = True
+      print("lives over, you lose")
+
+    #TODO-2: - If guess is not a letter in the chosen_word,
+    #Then reduce 'lives' by 1. 
+    #If lives goes down to 0 then the game should stop and it should print "You lose."
+
+    #Join all the elements in the list and turn it into a String.
+    #print(f"{' '.join(empty_list)}")
+
+    #Check if user has got all letters.
+    if "_" not in empty_list:
+        end_of_game = True
+        print("You win.")
+
+    #TODO-3: - print the ASCII art from 'stages' that corresponds to the current number of 'lives' the user has remaining.
