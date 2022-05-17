@@ -90,10 +90,10 @@ while not end_of_game:
         if letter == guess:
           empty_list[position] = letter
           
-    print(f"{' '.join(empty_list)}")
+    # print(f"{' '.join(empty_list)}")
     if guess not in chosen_word:
       lives -= 1
-      print(stages[lives])
+      # print(stages[lives])
 
     # if guess in chosen_word:
     #   for position in range(word_length):
@@ -110,6 +110,8 @@ while not end_of_game:
       end_of_game = True
       print("lives over, you lose")
 
+    print(f"{' '.join(empty_list)}")
+
     #TODO-2: - If guess is not a letter in the chosen_word,
     #Then reduce 'lives' by 1. 
     #If lives goes down to 0 then the game should stop and it should print "You lose."
@@ -121,5 +123,6 @@ while not end_of_game:
     if "_" not in empty_list:
         end_of_game = True
         print("You win.")
-
+  
     #TODO-3: - print the ASCII art from 'stages' that corresponds to the current number of 'lives' the user has remaining.
+    print(stages[lives])
